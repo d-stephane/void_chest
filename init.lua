@@ -40,6 +40,7 @@ minetest.register_node("void_chest:void_chest", {
 	on_timer = function(pos)
 	-- Particles for the void effect, implemented by MisterE, thanks! 
 		for i=1,10 do -- number of particles spawned every on_timer
+			local spin_speed = math.random(80,175)/1000 --controls how fast a particular particle spins
 			local vel_scalar = math.random(0,5)/10 -- multiplied by the particle's velocity vector of 1
 			local accel_scalar = math.random(1,5)/10 -- multiplied by the particle's accel vector of 1
 			local expir = math.random(1,10) -- number of sec particle will last, if it doesn't hit a node
@@ -58,6 +59,12 @@ minetest.register_node("void_chest:void_chest", {
 		    collision_removal = true,
 		    vertical = false,
 		    texture = "void_chest_void_particle.png",
+				animation = {
+					type = "vertical_frames",
+					aspect_w = 16,
+					aspect_h = 16,
+					length = spin_speed,
+				},
 		    glow = 5,
 			})
 		end
