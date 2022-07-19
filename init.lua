@@ -46,11 +46,12 @@ minetest.register_node("void_chest:void_chest", {
 	on_timer = function(pos)
 		if void_chest.show_particles then
 			-- Particles for the void effect, implemented by MisterE, thanks! 
-			for i=1,10 do -- number of particles spawned every on_timer
+			for i=1,2 do -- number of particles spawned every on_timer
+				local spin_speed = math.random(80,175)/1000 --controls how fast a particular particle spins
 				local vel_scalar = math.random(0,5)/10 -- multiplied by the particle's velocity vector of 1
 				local accel_scalar = math.random(1,5)/10 -- multiplied by the particle's accel vector of 1
-				local expir = math.random(1,10) -- number of sec particle will last, if it doesn't hit a node
-				local particle_pos = {x=pos.x + ((math.random(-10,10)/10)*(math.random(6,15)/10)), y=pos.y + ((math.random(-10,10)/10)*(math.random(6,15)/10)), z=pos.z+ ((math.random(-10,10)/10)*(math.random(6,15)/10))}
+				local expir = math.random(1,5) -- number of sec particle will last, if it doesn't hit a node
+				local particle_pos = {x=pos.x + ((math.random(-15,15)/10)*(math.random(6,15)/10)), y=pos.y + ((math.random(-15,15)/10)*(math.random(6,15)/10)), z=pos.z+ ((math.random(-15,15)/10)*(math.random(6,15)/10))}
 				local part_vel = vector.direction(particle_pos, pos)
 				part_vel = {x= vel_scalar*part_vel.x, y= vel_scalar*part_vel.y, z= vel_scalar*part_vel.z}
 				local part_accel = vector.direction(particle_pos, pos)
@@ -60,11 +61,17 @@ minetest.register_node("void_chest:void_chest", {
 					velocity = part_vel,
 					acceleration = part_accel,
 					expirationtime = expir,
-					size = math.random(7,10)/10,
+					size = math.random(5,15)/10,
 					collisiondetection = true,
 					collision_removal = true,
 					vertical = false,
 					texture = "void_chest_void_particle.png",
+						animation = {
+							type = "vertical_frames",
+							aspect_w = 16,
+							aspect_h = 16,
+							length = spin_speed,
+							},
 					glow = 5,
 				})
 			end
@@ -100,3 +107,4 @@ minetest.register_on_joinplayer(function(player)
 	local inv = player:get_inventory()
 	inv:set_size("void_chest:void_chest", 8*4)
 end)
+
