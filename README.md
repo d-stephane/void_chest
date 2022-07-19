@@ -1,6 +1,6 @@
 mesecraft mod: void_chest
 =====================================
-Copyright 2022 mesecraft.com
+Copyright 2020-2022 mesecraft.com
 
 
 Description
