@@ -1,0 +1,5 @@
+# textdomain: void_chest
+
+# void_chest translation template
+
+Use the power of the void to store your items.=
